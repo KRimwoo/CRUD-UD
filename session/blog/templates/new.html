@@ -3,6 +3,13 @@
     {% csrf_token %}
     제목 : <input type="text" name="title" />
     본문 : <textarea name="content" id="" cols="30" rows="10"></textarea>
+    카테고리 : 
+    <select name="category">
+        <option value="" selected>카테고리 선택</option>
+        {% for category in categories %}
+            <option value="{{ category.pk }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
     <input type="submit" value="작성하기"/>
 </form>
 

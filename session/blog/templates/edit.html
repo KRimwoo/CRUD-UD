@@ -2,7 +2,17 @@
 
 <form METHOD="POST" action="{% url 'update' edit_blog.id %}">
     {% csrf_token %}
-    <input type="text" name="title" value="{{edit_blog.title}}"/>
-    <textarea name="content" id="" clos="30">{{edit_blog.content}}</textarea>
+    제목 : <input type="text" name="title" value="{{edit_blog.title}}"/>
+    본문 : <textarea name="content" id="" clos="30">{{edit_blog.content}}</textarea>
+    카테고리 : 
+    <select name="category" >
+        {% for category in categories %}
+            {% if category.pk == edit_blog.category.pk %}
+                <option value="{{ category.pk }}" selected>{{ category.name }}</option>
+            {% else %}
+                <option value="{{ category.pk }}">{{ category.name }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
     <input type="submit" value="수정하기">
 </form>

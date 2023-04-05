@@ -2,8 +2,14 @@
 <br/>
 <hr/>
 <h2>{{blog.title}}</h2>
-<p>{{blog.content}}</p>
 <p>{{blog.created_at}}</p>
+<p>{{blog.category}}</p>
+<p>{{blog.content}}</p>
+
+{% if blog.image %}
+<img src="{{blog.image.url}}" alt="이미지">
+{% endif %}
+
 <a href="{% url 'home' %}">홈</a>
 <a href="{% url 'edit' blog.id %}">수정하기</a>
 <a href="{% url 'delete' blog.id %}">삭제하기</a>
