@@ -1,33 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{% block title %}{% endblock title %}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static "blog/css/base.css"%}"> 
 	{% block extrahead %}{% endblock extrahead %}
-</head>
-<body>
-	<header>
-		<button class="new"><a href="{%url 'new'%}">새 글 작성하기</a></button>
-		<div class="banner">
-			<a href={}>
-				<h1>LIKELION 11 Blog Project</h1>
-			</a>
-		</div>
-	</header>
-	<div class="content">
-		<div class="category-list">
-			<ul>
-				<li><a href="{% url 'home' %}">전체</a></li>
-				{% for category in categories %}
-					<li><a href="?category={{ category.id }}">{{ category.name }}</a></li>
-				{% endfor %}
-			</ul>
-		</div>
-		<div class="content-view">
-			{% block content %}{% endblock content %}
-		</div>
-	</div>
-</body>
+  </head>
+  <body>
+    <header>
+      <div class="banner">
+        <a href="{%url 'home'%}">
+          <h1>LIKELION 11 Blog Project</h1>
+		  <button class="new"><a href="{%url 'new'%}">새 글 작성하기</a></button>
+        </a>
+      </div>
+    </header>
+    <div class="content">
+      <div class="category-list">
+        <ul>
+          <li><a href="{% url 'home' %}">전체</a></li>
+          {% for category in categories %}
+          <li><a href="?category={{ category.id }}">{{ category.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="content-view">{% block content %}{% endblock content %}</div>
+    </div>
+  </body>
 </html>
