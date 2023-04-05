@@ -3,6 +3,11 @@ from .models import Blog, Category
 from .forms import BlogForm
 
 #render =>  response객체를 해당 url로 보내줌
+def base(request):
+    blogs = Blog.objects.all()
+    categories = Category.objects.all()
+    return render(request, 'base.html', {'blogs': blogs, 'categories': categories})
+
 def home(request):
     category_id = request.GET.get('category')
     if category_id:
@@ -10,7 +15,7 @@ def home(request):
     else:
         blogs = Blog.objects.all()
     categories = Category.objects.all()
-    return render(request,'home.html',{'blogs':blogs, 'categories':categories})
+    return render(request,'home.html',{'blogs':blogs, 'categories': categories})
 
 def detail(request,blog_id):
     blog = get_object_or_404(Blog,pk=blog_id)
@@ -30,7 +35,7 @@ def new(request):
 
 
 def create(request):
-    form = BlogForm(request.POST)#post로 넘어온 입력값
+    form = BlogForm(request.POST, request.FILES)#post로 넘어온 입력값
     if form.is_valid():
         new_blog = form.save(commit=False)
         new_blog.save()

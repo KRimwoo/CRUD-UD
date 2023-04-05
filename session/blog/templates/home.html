@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-우림의 블로그 gh페이지
+우림의 블로그 페이지
 {% endblock title %}
 
 {% block extrahead %}
@@ -10,14 +10,14 @@
 {% endblock extrahead %}
 
 {% block content%}
-    {% with category=request.GET.category %}
-        {% for blog in blogs %}
-        <a href="{%url 'detail' blog.id%}">
-        <h2>{{blog.title}}</h2>
-        <p>{{blog.summary}}</p>
-        <p>{{blog.created_at}}</p>
-        </a>
-        {% endfor %}
-    {% endwith %}
+    {% for blog in blogs %}
+        {% if category_id is none or category_id == blog.category.id %}
+            <a href="{%url 'detail' blog.id%}">
+                <h2>{{blog.title}}</h2>
+                <p>{{blog.summary}}</p>
+                <p>{{blog.created_at}}</p>
+            </a>
+        {% endif %}
+    {% endfor %}
 {% endblock  %}
 
