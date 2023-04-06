@@ -14,16 +14,20 @@
       <div class="banner">
         <a href="{%url 'home'%}">
           <h1>LIKELION 11 Blog Project</h1>
-		  <button class="new"><a href="{%url 'new'%}">새 글 작성하기</a></button>
         </a>
       </div>
+      <div class="button">
+        <button class="new"><a href="{%url 'new'%}">새 글 작성하기</a></button>
+      </div>
+      
     </header>
     <div class="content">
       <div class="category-list">
+        <p>Category</p>
         <ul>
-          <li><a href="{% url 'home' %}">전체</a></li>
+          <li><a href="{% url 'home' %}">- 전체</a></li>
           {% for category in categories %}
-          <li><a href="?category={{ category.id }}">{{ category.name }}</a></li>
+          <li><a href="{% url 'home' %}?category={{ category.id }}">- {{ category.name }}</a></li>
           {% endfor %}
         </ul>
       </div>

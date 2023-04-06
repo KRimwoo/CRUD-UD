@@ -19,7 +19,8 @@ def home(request):
 
 def detail(request,blog_id):
     blog = get_object_or_404(Blog,pk=blog_id)
-    return render(request,'detail.html',{'blog':blog})
+    categories = Category.objects.all()
+    return render(request,'detail.html',{'blog':blog, 'categories': categories})
 
 def new(request):
     categories = Category.objects.all() # 카테고리 정보를 가져옴

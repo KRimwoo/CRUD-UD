@@ -12,11 +12,13 @@
 {% block content%}
     {% for blog in blogs %}
         {% if category_id is none or category_id == blog.category.id %}
-            <a href="{%url 'detail' blog.id%}">
-                <h2>{{blog.title}}</h2>
-                <p>{{blog.summary}}</p>
-                <p>{{blog.created_at}}</p>
-            </a>
+            <div class="blog-list">
+                <a href="{%url 'detail' blog.id%}">
+                    <h2>{{blog.title}}</h2>
+                    <p class="summary">{{blog.summary}}</p>
+                </a>
+                <p class="created-at">{{blog.created_at}}</p>
+            </div>
         {% endif %}
     {% endfor %}
 {% endblock  %}

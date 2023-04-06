@@ -1,18 +1,42 @@
-<h1>새 글 작성하기</h1>
-<form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    제목 : <input type="text" name="title" />
-    본문 : <textarea name="content" id="" cols="30" rows="10"></textarea>
-    카테고리 : 
-    <select name="category">
-        <option value="" selected>카테고리 선택</option>
-        {% for category in categories %}
-            <option value="{{ category.pk }}">{{ category.name }}</option>
-        {% endfor %}
-    </select>
-    <input type="file" name="image" />
-    <input type="submit" value="작성하기"/>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>새 글 작성하기</title>
+    <link rel="stylesheet" href="{% static "blog/css/new.css"%}">
+  </head>
+  <body>
+    <header>
+      <div class="banner">
+        <a href="{%url 'home'%}">
+          <h1>LIKELION 11 Blog Project</h1>
+        </a>
+      </div>
+      <div class="write-new">
+        <h1>새 글 작성하기</h1>
+      </div>
+    </header>
 
-<a href="{% url 'home' %}">홈</a>
+    <div class="content">
+      <form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        제목 : <input type="text" name="title" />
+        카테고리 : 
+        <select name="category">
+            <option value="" selected>카테고리 선택</option>
+            {% for category in categories %}
+                <option value="{{ category.pk }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        본문 : <textarea name="content" id="" cols="30" rows="30"></textarea>
+        <input type="file" name="image" />
+        <input type="submit" value="작성하기"/>
+      </form>
+    </div>
+  </body>
+</html>
+
 

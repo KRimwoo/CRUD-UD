@@ -1,15 +1,33 @@
-<h1>블로그 상세 페이지</h1>
-<br/>
-<hr/>
-<h2>{{blog.title}}</h2>
-<p>{{blog.created_at}}</p>
-<p>{{blog.category}}</p>
-<p>{{blog.content}}</p>
+{% extends 'base.html' %}
+{% load static %}
 
-{% if blog.image %}
-<img src="{{blog.image.url}}" alt="이미지">
-{% endif %}
+{% block title %}
+블로그 상세 페이지
+{% endblock title %}
 
-<a href="{% url 'home' %}">홈</a>
-<a href="{% url 'edit' blog.id %}">수정하기</a>
-<a href="{% url 'delete' blog.id %}">삭제하기</a>
+{% block extrahead %}
+<link rel="stylesheet" href="{% static "blog/css/detail.css"%}"
+{% endblock extrahead %}
+
+{% block content%}
+	<div class="detail-header">
+		<h2>{{blog.title}}</h2>
+		<div class="date-cate">
+			<p>{{blog.created_at}} &nbsp;| &nbsp;{{blog.category}}</p>
+		</div>
+	</div>
+	<div class="detail-content">
+		<div class="text-section">
+			<p>{{blog.content}}</p>
+		</div>
+		<div class="image-section">
+			{% if blog.image %}
+				<img src="{{blog.image.url}}" alt="이미지">
+			{% endif %}
+		</div>
+	</div>
+	<div class="editing">
+		<a href="{% url 'edit' blog.id %}">수정하기</a> | 
+		<a href="{% url 'delete' blog.id %}">삭제하기</a>
+	</div>
+{% endblock  %}
