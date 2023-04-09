@@ -12,6 +12,8 @@
   <body>
     <header>
       <div class="banner">
+        <img src="{%static 'blog/img/wave.jpg'%}" alt="banner-image">
+        <div class="cover"></div>
         <a href="{%url 'home'%}">
           <h1>LIKELION 11 Blog Project</h1>
         </a>
@@ -19,7 +21,6 @@
       <div class="button">
         <button class="new"><a href="{%url 'new'%}">새 글 작성하기</a></button>
       </div>
-      
     </header>
     <div class="content">
       <div class="category-list">
@@ -33,5 +34,8 @@
       </div>
       <div class="content-view">{% block content %}{% endblock content %}</div>
     </div>
+    <footer>
+      <p>11기 김우림</p>
+    </footer>
   </body>
 </html>

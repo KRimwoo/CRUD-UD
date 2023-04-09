@@ -10,7 +10,7 @@
 {% endblock extrahead %}
 
 {% block content%}
-    {% for blog in blogs %}
+    {% for blog in page_obj %}
         {% if category_id is none or category_id == blog.category.id %}
             <div class="blog-list">
                 <a href="{%url 'detail' blog.id%}">
@@ -19,7 +19,27 @@
                 </a>
                 <p class="created-at">{{blog.created_at}}</p>
             </div>
+            
         {% endif %}
     {% endfor %}
+    <span class=page-number>
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo;</a>
+        <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        {% endif %}
+    
+        {% for num in page_range %}
+            {% if num == page_obj.number %}
+                <span class="current-page">{{ num }}</span>
+            {% else %}
+                <a href="?page={{ num }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+    
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number}}">&gt;</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+        {% endif %}
+    </span>
 {% endblock  %}
 

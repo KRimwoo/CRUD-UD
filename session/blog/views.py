@@ -1,6 +1,8 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Blog, Category
 from .forms import BlogForm
+from django.core.paginator import Paginator
+
 
 #render =>  response객체를 해당 url로 보내줌
 def base(request):
@@ -15,7 +17,13 @@ def home(request):
     else:
         blogs = Blog.objects.all()
     categories = Category.objects.all()
-    return render(request,'home.html',{'blogs':blogs, 'categories': categories})
+    paginator = Paginator(blogs, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    page_range = range(1, paginator.num_pages + 1)
+    return render(request,'home.html',{'categories': categories, 'page_obj': page_obj
+                                       , 'page_range': page_range})
 
 def detail(request,blog_id):
     blog = get_object_or_404(Blog,pk=blog_id)
